@@ -16,15 +16,29 @@ for i = 1:2
     % coefficients
     a     = -rho_w(i)./(g_p.*r); b     = -repmat(f(i)/g_p,length(a),1); c     = repmat(slope(i),length(a),1); v_theory =  ((-b + sqrt(b.^2 - 4.*a.*c))./(2*a));
     %
+    slope = (1/g_p) .* v .*( f(i) + v./r);
+    m_slope = (1/g_p) .* m_v .*( f(i) + m_v./m_r);
+    %
+    % plot the velocity vs radius
+    %     f = figure();
+    %     hold on
+    %     caxis([prctile(t,25),prctile(t,75)])
+    %     colormap(high_contrast_colormap(length(t),prctile(t,25),prctile(t,75),0,'spectral'))
+    %     scatter(r,v,4,linspace(min(t),max(t),length(t)));
+    %     scatter(m_r,m_v,80,linspace(min(m_t),max(m_t),length(m_t)),'filled','Marker','diamond');
+    %     %scatter(r,v_theory,[],linspace(min(r),max(r),length(r)));
+    %     ylim([0 200])5
+    %     colorbar
+    %     f.set('Position',[600 200 960 720]);
+    %     hold off
+    
+    % plot the slope vs radius
     f = figure();
-    hold on
-    caxis([prctile(t,25),prctile(t,75)])
-    colormap(high_contrast_colormap(length(t),prctile(t,25),prctile(t,75),0,'spectral'))
-    scatter(r,v,4,linspace(min(t),max(t),length(t)));
-    scatter(m_r,m_v,80,linspace(min(m_t),max(m_t),length(m_t)),'filled','Marker','diamond');
-    %scatter(r,v_theory,[],linspace(min(r),max(r),length(r)));
-    ylim([0 200])
-    colorbar
-    f.set('Position',[600 200 960 720]);
-    hold off
+        hold on
+        scatter(r  ,slope,1,linspace(min(t),max(t),length(t))); xlim([0,.5/2]); ylim([0 1]);
+        scatter(m_r,m_slope,[],linspace(min(m_t),max(m_t),length(m_t)),'filled');  xlim([0,.5/2]); ylim([0 1]);
+        f.set('Position',[600 200 960 720]);
+        hold off
+    %
+
 end
