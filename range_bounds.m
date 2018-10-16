@@ -13,6 +13,6 @@ else
 end
 %% Find the actual returns
 range_bounds = cat(cat_dim, minA, maxA);
-range_val    = range(A,cat_dim);
+range_val    = range(A(:, cat_dim));
 end
 
